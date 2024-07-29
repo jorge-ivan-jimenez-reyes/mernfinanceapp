@@ -25,38 +25,32 @@ const Row1 = () => {
   const revenue = useMemo(() => {
     return (
       data &&
-      data[0].monthlyData.map(({ month, revenue }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-        };
-      })
+      data[0].monthlyData.map(({ month, revenue }) => ({
+        name: month.substring(0, 3),
+        revenue: revenue,
+      }))
     );
   }, [data]);
 
   const revenueExpenses = useMemo(() => {
     return (
       data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-          expenses: expenses,
-        };
-      })
+      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
+        name: month.substring(0, 3),
+        revenue: revenue,
+        expenses: expenses,
+      }))
     );
   }, [data]);
 
   const revenueProfit = useMemo(() => {
     return (
       data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-          profit: (revenue - expenses).toFixed(2),
-        };
-      })
+      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
+        name: month.substring(0, 3),
+        revenue: revenue,
+        profit: (revenue - expenses).toFixed(2),
+      }))
     );
   }, [data]);
 
