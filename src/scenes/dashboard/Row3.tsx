@@ -1,43 +1,76 @@
 import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
 import FlexBetween from "@/components/FlexBetween";
-import {
-  useGetKpisQuery,
-  useGetProductsQuery,
-  useGetTransactionsQuery,
-} from "@/state/api";
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import React, { useMemo } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
-const Row3 = () => {
+// Define la interfaz para `formData`
+interface FormData {
+  month: string;
+  revenue: string;
+  expenses: string;
+  operationalExpenses: string;
+  nonOperationalExpenses: string;
+  productPrice: string;
+  productExpense: string;
+}
+
+const Row3 = ({ formData }: { formData: FormData }) => {
   const { palette } = useTheme();
   const pieColors = [palette.primary[800], palette.primary[500]];
 
-  const { data: kpiData } = useGetKpisQuery();
-  const { data: productData } = useGetProductsQuery();
-  const { data: transactionData } = useGetTransactionsQuery();
-
   const pieChartData = useMemo(() => {
-    if (kpiData) {
-      const totalExpenses = kpiData[0].totalExpenses;
-      return Object.entries(kpiData[0].expensesByCategory).map(
-        ([key, value]) => {
-          return [
-            {
-              name: key,
-              value: value,
-            },
-            {
-              name: `${key} of Total`,
-              value: totalExpenses - value,
-            },
-          ];
-        }
-      );
+    if (formData) {
+      const totalExpenses = Number(formData.expenses);
+      const expensesByCategory = {
+        "Operational Expenses": Number(formData.operationalExpenses),
+        "Non-Operational Expenses": Number(formData.nonOperationalExpenses),
+      };
+
+      return Object.entries(expensesByCategory).map(([key, value]) => {
+        return [
+          {
+            name: key,
+            value: value,
+          },
+          {
+            name: `${key} of Total`,
+            value: totalExpenses - value,
+          },
+        ];
+      });
     }
-  }, [kpiData]);
+    return null;
+  }, [formData]);
+
+  const productData = useMemo(() => {
+    if (formData) {
+      return [
+        {
+          _id: "1",
+          price: Number(formData.productPrice),
+          expense: Number(formData.productExpense),
+        },
+      ];
+    }
+    return [];
+  }, [formData]);
+
+  const transactionData = useMemo(() => {
+    if (formData) {
+      return [
+        {
+          _id: "1",
+          buyer: "Customer A",
+          amount: Number(formData.revenue),
+          productIds: ["1"],
+        },
+      ];
+    }
+    return [];
+  }, [formData]);
 
   const productColumns = [
     {

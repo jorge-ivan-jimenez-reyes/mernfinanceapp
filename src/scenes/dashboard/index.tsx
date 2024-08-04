@@ -75,8 +75,8 @@ const Dashboard = () => {
       }
     >
       <Row1 formData={formData} />
-      <Row2 />
-      <Row3 />
+      <Row2 formData={formData} />
+      <Row3 formData={formData} />
     </Box>
   );
 };

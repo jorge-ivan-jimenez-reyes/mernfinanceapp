@@ -5,9 +5,14 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 const InputPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    month: "",
     revenue: "",
     expenses: "",
-    month: "",
+    operationalExpenses: "",
+    nonOperationalExpenses: "",
+    productPrice: "",
+    productExpense: "",
+    recentTransactions: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +23,6 @@ const InputPage = () => {
   };
 
   const handleSubmit = () => {
-    // Navegar al dashboard con los datos del formulario
     navigate("/", { state: { formData } });
   };
 
@@ -50,6 +54,50 @@ const InputPage = () => {
         name="expenses"
         type="number"
         value={formData.expenses}
+        onChange={handleChange}
+        sx={{ mb: "1rem" }}
+      />
+      <TextField
+        fullWidth
+        label="Operational Expenses"
+        name="operationalExpenses"
+        type="number"
+        value={formData.operationalExpenses}
+        onChange={handleChange}
+        sx={{ mb: "1rem" }}
+      />
+      <TextField
+        fullWidth
+        label="Non-Operational Expenses"
+        name="nonOperationalExpenses"
+        type="number"
+        value={formData.nonOperationalExpenses}
+        onChange={handleChange}
+        sx={{ mb: "1rem" }}
+      />
+      <TextField
+        fullWidth
+        label="Product Price"
+        name="productPrice"
+        type="number"
+        value={formData.productPrice}
+        onChange={handleChange}
+        sx={{ mb: "1rem" }}
+      />
+      <TextField
+        fullWidth
+        label="Product Expense"
+        name="productExpense"
+        type="number"
+        value={formData.productExpense}
+        onChange={handleChange}
+        sx={{ mb: "1rem" }}
+      />
+      <TextField
+        fullWidth
+        label="Recent Transactions"
+        name="recentTransactions"
+        value={formData.recentTransactions}
         onChange={handleChange}
         sx={{ mb: "1rem" }}
       />

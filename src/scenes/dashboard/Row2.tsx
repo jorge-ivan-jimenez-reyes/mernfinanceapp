@@ -1,8 +1,4 @@
-import BoxHeader from "@/components/BoxHeader";
-import DashboardBox from "@/components/DashboardBox";
-import FlexBetween from "@/components/FlexBetween";
-import { useGetKpisQuery, useGetProductsQuery } from "@/state/api";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material"; // Asegúrate de que Typography esté importado
 import React, { useMemo } from "react";
 import {
   Tooltip,
@@ -19,45 +15,55 @@ import {
   Scatter,
   ZAxis,
 } from "recharts";
+import BoxHeader from "@/components/BoxHeader";
+import DashboardBox from "@/components/DashboardBox";
+import FlexBetween from "@/components/FlexBetween";
+
+// Define la interfaz para `formData`
+interface FormData {
+  month: string;
+  revenue: string;
+  expenses: string;
+  operationalExpenses: string;
+  nonOperationalExpenses: string;
+  productPrice: string;
+  productExpense: string;
+}
 
 const pieData = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 400 },
 ];
 
-const Row2 = () => {
+const Row2 = ({ formData }: { formData: FormData }) => {
   const { palette } = useTheme();
   const pieColors = [palette.primary[800], palette.primary[300]];
-  const { data: operationalData } = useGetKpisQuery();
-  const { data: productData } = useGetProductsQuery();
 
   const operationalExpenses = useMemo(() => {
-    return (
-      operationalData &&
-      operationalData[0].monthlyData.map(
-        ({ month, operationalExpenses, nonOperationalExpenses }) => {
-          return {
-            name: month.substring(0, 3),
-            "Operational Expenses": operationalExpenses,
-            "Non Operational Expenses": nonOperationalExpenses,
-          };
-        }
-      )
-    );
-  }, [operationalData]);
+    if (formData) {
+      return [
+        {
+          name: formData.month,
+          "Operational Expenses": Number(formData.operationalExpenses),
+          "Non Operational Expenses": Number(formData.nonOperationalExpenses),
+        },
+      ];
+    }
+    return [];
+  }, [formData]);
 
   const productExpenseData = useMemo(() => {
-    return (
-      productData &&
-      productData.map(({ _id, price, expense }) => {
-        return {
-          id: _id,
-          price: price,
-          expense: expense,
-        };
-      })
-    );
-  }, [productData]);
+    if (formData) {
+      return [
+        {
+          id: "1",
+          price: Number(formData.productPrice),
+          expense: Number(formData.productExpense),
+        },
+      ];
+    }
+    return [];
+  }, [formData]);
 
   return (
     <>
