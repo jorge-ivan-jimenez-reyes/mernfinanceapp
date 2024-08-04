@@ -7,6 +7,7 @@ import { themeSettings } from "./theme";
 import Navbar from "@/scenes/navbar";
 import Dashboard from "@/scenes/dashboard";
 import Predictions from "@/scenes/predictions";
+import InputPage from "@/scenes/input/InputPage"; // Importa la nueva página
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -19,6 +20,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/input" element={<InputPage />} /> {/* Ruta añadida */}
               <Route path="/predictions" element={<Predictions />} />
             </Routes>
           </Box>
