@@ -15,6 +15,7 @@ const gridTemplateLargeScreens = `
   "g h j"
   "g h j"
 `;
+
 const gridTemplateSmallScreens = `
   "a"
   "a"
