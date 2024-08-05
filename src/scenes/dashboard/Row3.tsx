@@ -49,7 +49,7 @@ const Row3 = ({ formData }: { formData: FormData }) => {
     if (formData) {
       return [
         {
-          _id: "1",
+          id: "1", // Cambiar _id a id
           price: Number(formData.productPrice),
           expense: Number(formData.productExpense),
         },
@@ -62,7 +62,7 @@ const Row3 = ({ formData }: { formData: FormData }) => {
     if (formData) {
       return [
         {
-          _id: "1",
+          id: "1", // Cambiar _id a id
           buyer: "Customer A",
           amount: Number(formData.revenue),
           productIds: ["1"],
@@ -74,7 +74,7 @@ const Row3 = ({ formData }: { formData: FormData }) => {
 
   const productColumns = [
     {
-      field: "_id",
+      field: "id",
       headerName: "id",
       flex: 1,
     },
@@ -94,7 +94,7 @@ const Row3 = ({ formData }: { formData: FormData }) => {
 
   const transactionColumns = [
     {
-      field: "_id",
+      field: "id",
       headerName: "id",
       flex: 1,
     },

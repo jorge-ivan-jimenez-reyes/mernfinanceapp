@@ -27,8 +27,16 @@ const InputPage = () => {
   };
 
   return (
-    <Box p="2rem">
-      <Typography variant="h4" mb="1rem">
+    <Box
+      p="2rem"
+      maxWidth="600px"
+      mx="auto"
+      mt="2rem"
+      borderRadius="8px"
+      bgcolor="#f5f5f5"
+      boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+    >
+      <Typography variant="h4" mb="1rem" textAlign="center" color="#333">
         Enter Your Data
       </Typography>
       <TextField
@@ -101,7 +109,19 @@ const InputPage = () => {
         onChange={handleChange}
         sx={{ mb: "1rem" }}
       />
-      <Button variant="contained" onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        onClick={handleSubmit}
+        fullWidth
+        sx={{
+          mt: "1rem",
+          backgroundColor: "#1976d2",
+          color: "#fff",
+          "&:hover": {
+            backgroundColor: "#115293",
+          },
+        }}
+      >
         Submit
       </Button>
     </Box>
